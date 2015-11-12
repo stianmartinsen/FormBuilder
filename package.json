@@ -1,7 +1,7 @@
 {
-  "name": "react-fullstack-skeleton",
+  "name": "form-builder-gui",
   "version": "0.0.1",
-  "description": "A minimal React fullstack skeleton featuring hot reloading and a backend api server.",
+  "description": "A nice form builder GUI",
   "main": "gulpfile.babel.js",
   "dependencies": {
     "history": "^1.12.3",
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fortruce/react-fullstack-skeleton.git"
+    "url": "https://github.com/stianmartinsen/FormBuilder"
   },
   "keywords": [
     "react",
@@ -54,7 +54,7 @@
   "author": "fortruce",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fortruce/react-fullstack-skeleton/issues"
+    "url": "https://github.com/stianmartinsen/FormBuilder/issues"
   },
-  "homepage": "https://github.com/fortruce/react-fullstack-skeleton"
+  "homepage": "https://github.com/stianmartinsen/FormBuilder"
 }
