@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { DragSource, DropTarget, DragDropContext } from 'react-dnd';
 import { fetchShouts } from '../actions';
 import { connect } from 'react-redux';
+import Field from './Field';
+import FieldSelector from './FieldSelector';
+import FieldType from './FieldType';
+import FormCanvas from './FormCanvas';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import CSSModules from 'react-css-modules';
 import styles from './test.css';
 
 @CSSModules(styles)
+@DragDropContext(HTML5Backend)
 class Application extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +26,10 @@ class Application extends React.Component {
     return (
       <div>
         <h1 styleName='foo'>Shouts</h1>
-        <ul>
-          { this.props.shouts.map((s, i) => <li key={i}>{s}</li>) }
-        </ul>
+        <FieldSelector>
+          <FieldType name="Text" fieldComponent={Field}></FieldType>
+        </FieldSelector>
+        <FormCanvas></FormCanvas>
       </div>
     );
   }
