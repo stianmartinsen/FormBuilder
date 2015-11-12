@@ -3,7 +3,7 @@ import { DragSource, DropTarget, DragDropContext } from 'react-dnd';
 import { fetchShouts } from '../actions';
 import { connect } from 'react-redux';
 import Field from './Field';
-import FieldSelector from './FieldSelector';
+import FieldList from './FieldList';
 import FieldType from './FieldType';
 import FormCanvas from './FormCanvas';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -26,9 +26,9 @@ class Application extends React.Component {
     return (
       <div>
         <h1 styleName='foo'>Shouts</h1>
-        <FieldSelector>
+        <FieldList>
           <FieldType name="Text" fieldComponent={Field}></FieldType>
-        </FieldSelector>
+        </FieldList>
         <FormCanvas></FormCanvas>
       </div>
     );
