@@ -1,11 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
+import { connect } from 'react-redux';
+import { addField } from '../actions';
 
 const dragSpec = {
   beginDrag(props) {
     return {
       name: props.name
     };
+  },
+
+  endDrag(props, monitor) {
+    props.dispatch(addField(props.fieldComponent));
   }
 };
 
@@ -13,12 +19,12 @@ const dragSpec = {
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))
-export default class FieldType extends Component {
+class FieldType extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    fieldComponent: React.PropTypes.func
+    fieldComponent: PropTypes.element
   }
 
   render() {
@@ -33,3 +39,5 @@ export default class FieldType extends Component {
     )
   }
 }
+
+export default connect()(FieldType);

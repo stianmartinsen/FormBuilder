@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import { DragSource, DropTarget, DragDropContext } from 'react-dnd';
-import { fetchShouts } from '../actions';
+import { DragDropContext } from 'react-dnd';
 import { connect } from 'react-redux';
 import Field from './Field';
 import FieldList from './FieldList';
@@ -18,21 +17,16 @@ class Application extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.dispatch(fetchShouts());
-  }
-
   render() {
     return (
       <div>
-        <h1 styleName='foo'>Shouts</h1>
         <FieldList>
           <FieldType name="Text" fieldComponent={Field}></FieldType>
         </FieldList>
-        <FormCanvas></FormCanvas>
+        <FormCanvas fields={this.props.fields}></FormCanvas>
       </div>
     );
   }
 }
 
-export default connect(state => ({ shouts: state.shouts }))(Application);
+export default connect(state => ({fields: state.canvas}))(Application);

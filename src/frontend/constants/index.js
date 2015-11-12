@@ -1,1 +1,1 @@
-export const RECEIVED_SHOUTS = 'RECEIVED_SHOUTS';
+export const ADD_FIELD = 'ADD_FIELD';

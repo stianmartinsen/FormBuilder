@@ -1,1 +1,5 @@
-export { default as shouts } from './shouts';
+import canvas from './canvas';
+
+export {
+  canvas
+}

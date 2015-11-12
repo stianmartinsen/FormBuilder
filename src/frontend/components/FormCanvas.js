@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { DragSource, DropTarget, DragDropContext } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
+import { connect } from 'react-redux';
 
-const boxTarget = {
+const targetSpec = {
   drop(props, monitor, component) {
     return {
       name: 'FormCanvas'
@@ -9,7 +10,7 @@ const boxTarget = {
   }
 };
 
-@DropTarget('field', boxTarget, (connect, monitor) => ({
+@DropTarget('field', targetSpec, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
@@ -18,7 +19,8 @@ export default class FormCanvas extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
-    canDrop: PropTypes.bool.isRequired
+    canDrop: PropTypes.bool.isRequired,
+    fields: PropTypes.array
   }
 
   render() {
@@ -38,7 +40,11 @@ export default class FormCanvas extends Component {
           'Release to drop' :
           'Drag a box here'
         }
+        {this.props.fields.map((Field, i) => {
+          return <Field key={i} />
+        })}
       </div>
     );
   }
 }
+export default connect()(FormCanvas);
