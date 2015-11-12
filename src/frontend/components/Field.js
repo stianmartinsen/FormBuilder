@@ -14,7 +14,7 @@ class Field extends Component {
     return (
       <div>
         <label>{this.props.label ? this.props.label : 'Field'}</label>
-        <input type={this.props.type ? this.props.type : 'text'} readonly />
+        <input type={this.props.type ? this.props.type : 'text'} readOnly />
       </div>
     );
   }

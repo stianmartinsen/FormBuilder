@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 
+import CSSModules from 'react-css-modules';
+import styles from '../css/formCanvas.css';
+
 const targetSpec = {
   drop(props, monitor, component) {
     return {
@@ -15,6 +18,7 @@ const targetSpec = {
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
 }))
+@CSSModules(styles)
 export default class FormCanvas extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
@@ -27,15 +31,8 @@ export default class FormCanvas extends Component {
     const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
-    let backgroundColor = '#222';
-    if (isActive) {
-      backgroundColor = 'darkgreen';
-    } else if (canDrop) {
-      backgroundColor = 'darkkhaki';
-    }
-
     return connectDropTarget(
-      <div>
+      <div styleName="canvas">
         {isActive ?
           'Release to drop' :
           'Drag a box here'

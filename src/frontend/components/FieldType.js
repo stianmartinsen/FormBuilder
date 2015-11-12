@@ -3,6 +3,9 @@ import { DragSource } from 'react-dnd';
 import { connect } from 'react-redux';
 import { addField } from '../actions';
 
+import CSSModules from 'react-css-modules';
+import styles from '../css/fieldType.css';
+
 const dragSpec = {
   beginDrag(props) {
     return {
@@ -17,23 +20,21 @@ const dragSpec = {
 
 @DragSource('field', dragSpec, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
 }))
+@CSSModules(styles)
 class FieldType extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     fieldComponent: PropTypes.element
   }
 
   render() {
-    const { isDragging, connectDragSource } = this.props;
+    const { connectDragSource } = this.props;
     const { name } = this.props;
-    const opacity = isDragging ? 0.4 : 1;
 
     return connectDragSource(
-      <div>
+      <div styleName="field">
         {this.props.name}
       </div>
     )

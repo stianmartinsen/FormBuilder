@@ -8,10 +8,10 @@ import FormCanvas from './FormCanvas';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import CSSModules from 'react-css-modules';
-import styles from './test.css';
+import styles from '../css/base.css';
 
-@CSSModules(styles)
 @DragDropContext(HTML5Backend)
+@CSSModules(styles)
 class Application extends React.Component {
   constructor(props) {
     super(props);
@@ -19,11 +19,16 @@ class Application extends React.Component {
 
   render() {
     return (
-      <div>
-        <FieldList>
-          <FieldType name="Text" fieldComponent={Field}></FieldType>
-        </FieldList>
-        <FormCanvas fields={this.props.fields}></FormCanvas>
+      <div styleName="wrapper">
+        <div styleName="list">
+          <FieldList>
+            <FieldType name="Text" fieldComponent={Field}></FieldType>
+          </FieldList>
+        </div>
+
+        <div styleName="canvas">
+          <FormCanvas fields={this.props.fields}></FormCanvas>
+        </div>
       </div>
     );
   }

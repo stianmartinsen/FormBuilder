@@ -1,0 +1,19 @@
+.field {
+  background: #fff;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  transition: box-shadow .1s;
+  cursor: move;
+  cursor: grab;
+  font-size: 14px;
+}
+
+.field:hover {
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  border-color: #ccc;
+}
+
+.dragging {
+  background: blue;
+}
