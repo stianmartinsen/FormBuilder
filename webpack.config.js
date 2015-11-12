@@ -6,6 +6,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var frontendConfig = {
   entry: [
@@ -21,10 +22,13 @@ var frontendConfig = {
   devtool: 'sourcemap',
 
   plugins: [
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Skele',
+      title: 'FormBuilder',
       filename: 'index.html',
       template: 'src/frontend/index.template.html',
       inject: true
@@ -42,6 +46,10 @@ var frontendConfig = {
         test: /\.scss$/,
         include: path.join(__dirname, 'src', 'frontend', 'scss'),
         loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       }
     ]
   }

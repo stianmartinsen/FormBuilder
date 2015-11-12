@@ -2,6 +2,10 @@ import React from 'react';
 import { fetchShouts } from '../actions';
 import { connect } from 'react-redux';
 
+import CSSModules from 'react-css-modules';
+import styles from './test.css';
+
+@CSSModules(styles)
 class Application extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +18,7 @@ class Application extends React.Component {
   render() {
     return (
       <div>
-        <h1>Shouts</h1>
+        <h1 styleName='foo'>Shouts</h1>
         <ul>
           { this.props.shouts.map((s, i) => <li key={i}>{s}</li>) }
         </ul>
