@@ -14,7 +14,10 @@ const dragSpec = {
   },
 
   endDrag(props, monitor) {
-    props.dispatch(addField(props.fieldComponent));
+    const dropResult = monitor.getDropResult();
+    if (dropResult && dropResult.name === 'FormCanvas') {
+      props.dispatch(addField(props.fieldComponent));
+    }
   }
 };
 
