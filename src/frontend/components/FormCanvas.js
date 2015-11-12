@@ -18,7 +18,7 @@ const targetSpec = {
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
 }))
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 export default class FormCanvas extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
@@ -33,13 +33,11 @@ export default class FormCanvas extends Component {
 
     return connectDropTarget(
       <div styleName="canvas">
-        {isActive ?
-          'Release to drop' :
-          'Drag a box here'
-        }
         {this.props.fields.map((Field, i) => {
           return <Field key={i} />
         })}
+
+        <div styleName={'empty ' + (this.props.fields.length ? 'hidden' : '')}>Add fields from the list</div>
       </div>
     );
   }
