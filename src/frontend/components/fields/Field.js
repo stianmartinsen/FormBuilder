@@ -12,7 +12,7 @@ class Field extends Component {
           <span styleName="fieldType">{this.props.label ? this.props.label : 'Field'}</span>
           <span styleName="fieldTitle">{this.props.title ? this.props.title : 'No title'}</span>
         </label>
-        <input styleName="input" type={this.props.type ? this.props.type : 'text'} readOnly value={this.props.type} />
+        <input styleName="input" type={this.props.type ? this.props.type : 'text'} readOnly />
       </div>
     );
   }
