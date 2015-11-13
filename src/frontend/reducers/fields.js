@@ -10,6 +10,10 @@ export default function fields(state = [], action) {
           id: state.length + 1,
         }
       ]
+    case constants.REMOVE_FIELD:
+      return state.filter((field) => {
+        return field.id != action.fieldId
+      });
     case constants.FIELD_MOVE:
       const fields = state;
       const field = fields[action.fieldId];

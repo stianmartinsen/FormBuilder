@@ -4,6 +4,10 @@ export function addField(fieldComponent) {
   return {type: constants.ADD_FIELD, fieldComponent}
 }
 
+export function removeField(fieldId) {
+  return {type: constants.REMOVE_FIELD, fieldId}
+}
+
 export function moveFields(fieldId, hoverId) {
   return {type: constants.FIELD_MOVE, fieldId, hoverId}
 }
