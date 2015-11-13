@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 
+import CSSModules from 'react-css-modules';
+import styles from '../css/sortable.css';
+
 const sortableSource = {
   beginDrag(props) {
     return {
@@ -59,12 +62,13 @@ const sorableTarget = {
 @DropTarget((props) => props.type, sorableTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
+@CSSModules(styles)
 export default class Sortable extends Component {
   render() {
     const {connectDragSource, connectDropTarget, isDragging, ...props} = this.props;
 
     return connectDragSource(connectDropTarget(
-      <div style={{opacity: isDragging ? 0 : 1}}>{this.props.children}</div>
+      <div styleName={isDragging ? 'ghost' : ''}>{this.props.children}</div>
     ));
   }
 }
