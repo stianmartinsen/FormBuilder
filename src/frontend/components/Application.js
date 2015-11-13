@@ -27,7 +27,7 @@ class Application extends React.Component {
         </div>
 
         <div styleName="canvas">
-          <FormCanvas fields={this.props.fields}></FormCanvas>
+          <FormCanvas moveField={this.moveField} fields={this.props.fields} onMoveField={this.moveField}></FormCanvas>
         </div>
       </div>
     );
