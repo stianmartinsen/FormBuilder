@@ -3,74 +3,11 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import { connect } from 'react-redux';
 
-import {moveFields} from '../actions';
+import Sortable from './Sortable';
+import { moveFields } from '../actions';
 
 import CSSModules from 'react-css-modules';
 import styles from '../css/formCanvas.css';
-
-const fieldWrapSource = {
-  beginDrag(props) {
-    return {
-      index: props.index
-    };
-  }
-};
-
-const fieldWrapTarget = {
-  hover(props, monitor, component) {
-    if (monitor.getItem().type === 'fieldType') {
-      return;
-    }
-
-    const dragIndex = monitor.getItem().index;
-    const hoverIndex = props.index;
-
-    // Don't replace items with themselves
-    if (dragIndex === hoverIndex) {
-      return;
-    }
-
-    // Determine rectangle on screen
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
-
-    // Get vertical middle
-    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-    // Determine mouse position
-    const clientOffset = monitor.getClientOffset();
-
-    // Get pixels to the top
-    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-    // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-      return;
-    }
-
-    // Dragging upwards
-    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-      return;
-    }
-
-    props.dispatch(moveFields(dragIndex, hoverIndex));
-
-    monitor.getItem().index = hoverIndex;
-  }
-};
-@DragSource('field', fieldWrapSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
-}))
-@DropTarget('field', fieldWrapTarget, (connect) => ({
-  connectDropTarget: connect.dropTarget()
-}))
-class FieldWrap extends Component {
-  render () {
-    const {connectDragSource, connectDropTarget, isDragging, id, onMove, ...props} = this.props;
-    return connectDragSource(connectDropTarget(<div style={{opacity: isDragging ? .5 : 1}}>{this.props.children}</div>));
-  }
-}
-FieldWrap = connect()(FieldWrap);
 
 const targetSpec = {
   drop(props, monitor, component) {
@@ -94,6 +31,10 @@ export default class FormCanvas extends Component {
     fields: PropTypes.array
   }
 
+  onSort(dragIndex, hoverIndex) {
+    this.props.dispatch(moveFields(dragIndex, hoverIndex));
+  }
+
   render() {
     const { canDrop, isOver, connectDropTarget, onMoveField } = this.props;
     const isActive = canDrop && isOver;
@@ -106,7 +47,7 @@ export default class FormCanvas extends Component {
         }
         {this.props.fields.map((field, i) => {
           const Field = field.fieldComponent;
-          return <FieldWrap index={i} key={i}><Field/></FieldWrap>
+          return <Sortable index={i} key={field.id} onSort={this.onSort.bind(this)} type="field"><Field/>{field.id}</Sortable>
         })}
 
         <div styleName={'empty ' + (this.props.fields.length ? 'hidden' : '')}>Add fields from the list</div>
