@@ -38,7 +38,7 @@ gulp.task('dev', () => {
   server.use(WebpackDevMiddleware(compiler));
   server.use(WebpackHotMiddleware(compiler));
 
-  server.listen(3000, 'localhost', (err) => {
+  server.listen(3000, '0.0.0.0', (err) => {
     if (err)
       return console.log(err);
     console.log('webpack-dev-server listening on localhost:3000');
