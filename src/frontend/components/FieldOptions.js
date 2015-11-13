@@ -12,7 +12,7 @@ class FieldOptions extends Component {
         {this.props.fields.map((field, i) => {
           if (field.id == this.props.activeField) {
             const Field = field.fieldComponent;
-            return <Field />
+            return "";
           }
         })}
       </div>

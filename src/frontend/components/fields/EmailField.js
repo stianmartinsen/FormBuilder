@@ -4,7 +4,9 @@ import Field from './Field';
 export default class EmailField extends Component {
   render() {
     return (
-      <Field type="email" label="E-mail" {...this.props} />
+      <Field type="email" label="E-mail" {...this.props}>
+        TEST
+      </Field>
     );
   }
 }

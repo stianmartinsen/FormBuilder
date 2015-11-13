@@ -9,6 +9,16 @@ import styles from '../../css/field.css';
 @CSSModules(styles, {allowMultiple: true})
 class Field extends Component {
   render() {
+    let fieldContent;
+
+    if (this.props.children) {
+      fieldContent = this.props.children;
+    } else {
+      fieldContent = (<div>
+        <input styleName="input" type={this.props.type ? this.props.type : 'text'} readOnly />
+      </div>);
+    }
+
     return (
       <div styleName={"field " + (this.props.activeField == this.props.id ? "active" : "")} onClick={e => this.handleClick(e)}>
         <button styleName="removeButton" onClick={e => this.removeField(e)}>
@@ -16,10 +26,11 @@ class Field extends Component {
         </button>
 
         <label styleName="label">
-          <span styleName="fieldType">{this.props.label ? this.props.label : 'Field'}</span>
+          <span styleName="fieldType">{this.props.label ? this.props.label : 'Text field'}</span>
           <span styleName="fieldTitle">{this.props.title ? this.props.title : 'No title'}</span>
         </label>
-        <input styleName="input" type={this.props.type ? this.props.type : 'text'} readOnly />
+
+        {fieldContent}
       </div>
     );
   }

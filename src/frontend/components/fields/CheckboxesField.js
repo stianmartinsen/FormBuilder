@@ -17,15 +17,7 @@ class CheckboxesField extends Component {
     const { checkboxes } = this.props;
 
     return (
-      <div styleName="field">
-        <label styleName="label">
-          <span styleName="fieldType">{this.props.label ? this.props.label : 'Field'}</span>
-          <span styleName="fieldTitle">{this.props.title ? this.props.title : 'No title'}</span>
-        </label>
-        <div>
-          {checkboxes.map(this.renderCheckbox)}
-        </div>
-      </div>
+      <Field label="Checkboxes" {...this.props}>{checkboxes.map(this.renderCheckbox)}</Field>
     );
   }
 
