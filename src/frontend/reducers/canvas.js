@@ -1,17 +1,7 @@
-import { ADD_FIELD, FIELD_INCREMENT_PRIORITY, FIELD_DECREMENT_PRIORITY, FIELD_MOVE } from '../constants';
-import Field from '../components/Field';
+import { ADD_FIELD, FIELD_MOVE } from '../constants';
 import update from 'react/lib/update';
 
-const initialState = [
-  {
-    fieldComponent: Field,
-    id: 1
-  },
-  {
-    fieldComponent: Field,
-    id: 2
-  }
-]
+const initialState = []
 
 export default function canvas(state = initialState, action) {
   switch (action.type) {
