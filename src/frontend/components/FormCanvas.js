@@ -37,14 +37,9 @@ export default class FormCanvas extends Component {
 
   render() {
     const { canDrop, isOver, connectDropTarget, onMoveField } = this.props;
-    const isActive = canDrop && isOver;
 
     return connectDropTarget(
       <div styleName="canvas">
-        {isActive ?
-          'Release to drop' :
-          'Drag a box here'
-        }
         {this.props.fields.map((field, i) => {
           const Field = field.fieldComponent;
           return <Sortable index={i} key={field.id} onSort={this.onSort.bind(this)} type="field"><Field id={field.id} /></Sortable>
