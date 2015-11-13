@@ -30,8 +30,6 @@ export default function fields(state = [], action) {
       const { label, required } = action;
       return state.map((field) => {
         if (field.id === action.fieldId) {
-          console.log('ADD TO', field.id);
-
           field.fieldProps.checkboxes = [...field.fieldProps.checkboxes, {label, required}];
         }
         return field;
