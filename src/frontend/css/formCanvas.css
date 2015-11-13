@@ -1,4 +1,20 @@
 .canvas {
-  padding: 20px;
+  padding: 10px;
   height: 100%;
+  min-height: 40vh;
+  position: relative;
+}
+
+.empty {
+  text-align: center;
+  opacity: .3;
+  transition: opacity .5s;
+  position: absolute;
+  top: 42%;
+  left: 0;
+  right: 0;
+}
+
+.hidden {
+  opacity: 0;
 }

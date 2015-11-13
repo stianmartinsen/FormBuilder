@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
 import { DragDropContext } from 'react-dnd';
 import { connect } from 'react-redux';
-import Field from './Field';
 import FieldList from './FieldList';
 import FieldType from './FieldType';
 import FormCanvas from './FormCanvas';
 import HTML5Backend from 'react-dnd-html5-backend';
+
+import Field from './fields/Field';
+import EmailField from './fields/EmailField';
 
 import CSSModules from 'react-css-modules';
 import styles from '../css/base.css';
@@ -22,7 +24,8 @@ class Application extends React.Component {
       <div styleName="wrapper">
         <div styleName="list">
           <FieldList>
-            <FieldType name="Text" fieldComponent={Field}></FieldType>
+            <FieldType name="Text field" fieldComponent={Field}></FieldType>
+            <FieldType name="E-mail" fieldComponent={EmailField}></FieldType>
           </FieldList>
         </div>
 

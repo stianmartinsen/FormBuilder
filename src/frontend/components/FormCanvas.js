@@ -86,7 +86,7 @@ const targetSpec = {
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop()
 }))
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 export default class FormCanvas extends Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
@@ -109,6 +109,8 @@ export default class FormCanvas extends Component {
           const Field = field.fieldComponent;
           return <FieldWrap index={i} key={i}><Field/>{field.priority}</FieldWrap>
         })}
+
+        <div styleName={'empty ' + (this.props.fields.length ? 'hidden' : '')}>Add fields from the list</div>
       </div>
     );
   }
