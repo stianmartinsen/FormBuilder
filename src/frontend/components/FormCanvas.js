@@ -18,6 +18,10 @@ const fieldWrapSource = {
 
 const fieldWrapTarget = {
   hover(props, monitor, component) {
+    if (monitor.getItem().type === 'fieldType') {
+      return;
+    }
+
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
 
@@ -38,10 +42,6 @@ const fieldWrapTarget = {
     // Get pixels to the top
     const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-    // Only perform the move when the mouse has crossed half of the items height
-    // When dragging downwards, only move when the cursor is below 50%
-    // When dragging upwards, only move when the cursor is above 50%
-
     // Dragging downwards
     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
       return;
@@ -52,23 +52,22 @@ const fieldWrapTarget = {
       return;
     }
 
-    if (dragIndex && hoverIndex) {
-      props.dispatch(moveFields(dragIndex, hoverIndex));
-    }
+    props.dispatch(moveFields(dragIndex, hoverIndex));
 
     monitor.getItem().index = hoverIndex;
   }
 };
-@DragSource('field', fieldWrapSource, (connect) => ({
-  connectDragSource: connect.dragSource()
+@DragSource('field', fieldWrapSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
 }))
 @DropTarget('field', fieldWrapTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
 class FieldWrap extends Component {
   render () {
-    const {connectDragSource, connectDropTarget, id, onMove, ...props} = this.props;
-    return connectDragSource(connectDropTarget(<div>{this.props.children}</div>));
+    const {connectDragSource, connectDropTarget, isDragging, id, onMove, ...props} = this.props;
+    return connectDragSource(connectDropTarget(<div style={{opacity: isDragging ? .5 : 1}}>{this.props.children}</div>));
   }
 }
 FieldWrap = connect()(FieldWrap);
@@ -107,7 +106,7 @@ export default class FormCanvas extends Component {
         }
         {this.props.fields.map((field, i) => {
           const Field = field.fieldComponent;
-          return <FieldWrap index={i} key={i}><Field/>{field.priority}</FieldWrap>
+          return <FieldWrap index={i} key={i}><Field/></FieldWrap>
         })}
 
         <div styleName={'empty ' + (this.props.fields.length ? 'hidden' : '')}>Add fields from the list</div>

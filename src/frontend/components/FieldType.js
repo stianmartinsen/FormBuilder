@@ -6,10 +6,11 @@ import { addField } from '../actions';
 import CSSModules from 'react-css-modules';
 import styles from '../css/fieldType.css';
 
-const dragSpec = {
+const dragSource = {
   beginDrag(props) {
     return {
-      name: props.name
+      name: props.name,
+      type: 'fieldType'
     };
   },
 
@@ -21,7 +22,7 @@ const dragSpec = {
   }
 };
 
-@DragSource('field', dragSpec, (connect, monitor) => ({
+@DragSource('field', dragSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
 }))
 @CSSModules(styles)
