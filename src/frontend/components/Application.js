@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FieldList from './FieldList';
 import FieldType from './FieldType';
 import FormCanvas from './FormCanvas';
+import FieldOptions from './FieldOptions';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import Field from './fields/Field';
@@ -23,6 +24,7 @@ class Application extends React.Component {
     return (
       <div styleName="wrapper">
         <div styleName="list">
+          <FieldOptions fields={this.props.fields} />
           <FieldList>
             <FieldType name="Text field" fieldComponent={Field}></FieldType>
             <FieldType name="E-mail" fieldComponent={EmailField}></FieldType>
@@ -37,4 +39,4 @@ class Application extends React.Component {
   }
 }
 
-export default connect(state => ({fields: state.canvas}))(Application);
+export default connect(state => ({fields: state.fields}))(Application);

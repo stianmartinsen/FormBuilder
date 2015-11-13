@@ -47,7 +47,7 @@ export default class FormCanvas extends Component {
         }
         {this.props.fields.map((field, i) => {
           const Field = field.fieldComponent;
-          return <Sortable index={i} key={field.id} onSort={this.onSort.bind(this)} type="field"><Field/>{field.id}</Sortable>
+          return <Sortable index={i} key={field.id} onSort={this.onSort.bind(this)} type="field"><Field id={field.id} /></Sortable>
         })}
 
         <div styleName={'empty ' + (this.props.fields.length ? 'hidden' : '')}>Add fields from the list</div>

@@ -1,5 +1,7 @@
-import canvas from './canvas';
+import fields from './fields';
+import activeField from './activeField';
 
 export {
-  canvas
+  fields,
+  activeField
 }

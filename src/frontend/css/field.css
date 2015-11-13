@@ -11,6 +11,11 @@
   background: #f9f9f9;
 }
 
+.field.active {
+  background: #ecf6fc;
+  border: 1px solid #d7e9f3;
+}
+
 .field * {
   pointer-events: none;
 }

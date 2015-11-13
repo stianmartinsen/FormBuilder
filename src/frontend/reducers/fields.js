@@ -1,19 +1,16 @@
-import { ADD_FIELD, FIELD_MOVE } from '../constants';
+import * as constants from '../constants';
 import update from 'react/lib/update';
 
-const initialState = []
-
-export default function canvas(state = initialState, action) {
+export default function fields(state = [], action) {
   switch (action.type) {
-    case ADD_FIELD:
+    case constants.ADD_FIELD:
       return [
-        ...state,
-        {
+        ...state, {
           fieldComponent: action.fieldComponent,
           id: state.length + 1,
         }
       ]
-    case FIELD_MOVE:
+    case constants.FIELD_MOVE:
       const fields = state;
       const field = fields[action.fieldId];
 
