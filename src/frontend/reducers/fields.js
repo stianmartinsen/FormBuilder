@@ -8,6 +8,7 @@ export default function fields(state = [], action) {
         ...state, {
           fieldComponent: action.fieldComponent,
           id: state.length + 1,
+          fieldProps: Object.assign({}, action.fieldProps)
         }
       ]
     case constants.FIELD_MOVE:
@@ -20,6 +21,18 @@ export default function fields(state = [], action) {
           [action.hoverId, 0, field]
         ]
       });
+
+    case constants.ADD_CHECKBOX_TO_FIELD:
+      const { label, required } = action;
+      return state.map((field) => {
+        if (field.id === action.fieldId) {
+          console.log('ADD TO', field.id);
+
+          field.fieldProps.checkboxes = [...field.fieldProps.checkboxes, {label, required}];
+        }
+        return field;
+      });
+
     default:
       return state;
   }

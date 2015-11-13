@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import Field from './fields/Field';
 import EmailField from './fields/EmailField';
+import CheckboxesField from './fields/CheckboxesField';
 
 import CSSModules from 'react-css-modules';
 import styles from '../css/base.css';
@@ -28,6 +29,7 @@ class Application extends React.Component {
           <FieldList>
             <FieldType name="Text field" fieldComponent={Field}></FieldType>
             <FieldType name="E-mail" fieldComponent={EmailField}></FieldType>
+            <FieldType name="Checkboxes" fieldComponent={CheckboxesField}></FieldType>
           </FieldList>
         </div>
 

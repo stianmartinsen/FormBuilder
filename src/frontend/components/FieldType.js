@@ -17,7 +17,7 @@ const dragSource = {
   endDrag(props, monitor) {
     const dropResult = monitor.getDropResult();
     if (dropResult && dropResult.name === 'FormCanvas') {
-      props.dispatch(addField(props.fieldComponent));
+      props.dispatch(addField(props.fieldComponent, props.fieldComponent.defaultFieldProps));
     }
   }
 };
