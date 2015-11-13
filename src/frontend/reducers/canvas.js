@@ -7,10 +7,11 @@ export default function canvas(state = initialState, action) {
   switch (action.type) {
     case ADD_FIELD:
       return [
+        ...state,
         {
           fieldComponent: action.fieldComponent,
           id: state.length + 1,
-        }, ...state
+        }
       ]
     case FIELD_MOVE:
       const fields = state;
