@@ -11,6 +11,10 @@ export default function fields(state = [], action) {
           fieldProps: Object.assign({}, action.fieldProps)
         }
       ]
+    case constants.REMOVE_FIELD:
+      return state.filter((field) => {
+        return field.id != action.fieldId
+      });
     case constants.FIELD_MOVE:
       const fields = state;
       const field = fields[action.fieldId];
